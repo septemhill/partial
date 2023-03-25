@@ -1,11 +1,25 @@
 package partial
 
+type FnArg0[A any] func() A
+
 type FnArg1[A, B any] func(A) B
+
+func (fn FnArg1[A, B]) P1(a A) FnArg0[B] {
+	return func() B {
+		return fn(a)
+	}
+}
 
 type FnArg2[A, B, C any] func(A, B) C
 
 func (fn FnArg2[A, B, C]) P1(a A) FnArg1[B, C] {
 	return func(b B) C {
+		return fn(a, b)
+	}
+}
+
+func (fn FnArg2[A, B, C]) P2(a A, b B) FnArg0[C] {
+	return func() C {
 		return fn(a, b)
 	}
 }
@@ -20,6 +34,12 @@ func (fn FnArg3[A, B, C, D]) P1(a A) FnArg2[B, C, D] {
 
 func (fn FnArg3[A, B, C, D]) P2(a A, b B) FnArg1[C, D] {
 	return func(c C) D {
+		return fn(a, b, c)
+	}
+}
+
+func (fn FnArg3[A, B, C, D]) P3(a A, b B, c C) FnArg0[D] {
+	return func() D {
 		return fn(a, b, c)
 	}
 }
@@ -40,6 +60,12 @@ func (fn FnArg4[A, B, C, D, E]) P2(a A, b B) FnArg2[C, D, E] {
 
 func (fn FnArg4[A, B, C, D, E]) P3(a A, b B, c C) FnArg1[D, E] {
 	return func(d D) E {
+		return fn(a, b, c, d)
+	}
+}
+
+func (fn FnArg4[A, B, C, D, E]) P4(a A, b B, c C, d D) FnArg0[E] {
+	return func() E {
 		return fn(a, b, c, d)
 	}
 }
@@ -66,6 +92,12 @@ func (fn FnArg5[A, B, C, D, E, F]) P3(a A, b B, c C) FnArg2[D, E, F] {
 
 func (fn FnArg5[A, B, C, D, E, F]) P4(a A, b B, c C, d D) FnArg1[E, F] {
 	return func(e E) F {
+		return fn(a, b, c, d, e)
+	}
+}
+
+func (fn FnArg5[A, B, C, D, E, F]) P5(a A, b B, c C, d D, e E) FnArg0[F] {
+	return func() F {
 		return fn(a, b, c, d, e)
 	}
 }

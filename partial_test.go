@@ -6,6 +6,17 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestFnArg1(t *testing.T) {
+	sum := func(a int) int {
+		return a + 100
+	}
+
+	t.Run("FnArg1 P1 Case", func(t *testing.T) {
+		r1 := FnArg1[int, int](sum).P1(1)()
+		assert.Equal(t, sum(1), r1)
+	})
+}
+
 func TestFnArg2(t *testing.T) {
 	sum := func(a, b int) int {
 		return a + b
@@ -18,6 +29,11 @@ func TestFnArg2(t *testing.T) {
 
 	t.Run("FnArg2 P1 Case", func(t *testing.T) {
 		r1 := FnArg2[int, int, int](sum).P1(1)(2)
+		assert.Equal(t, sum(1, 2), r1)
+	})
+
+	t.Run("FnArg2 P2 Case", func(t *testing.T) {
+		r1 := FnArg2[int, int, int](sum).P2(1, 2)()
 		assert.Equal(t, sum(1, 2), r1)
 	})
 }
@@ -42,6 +58,11 @@ func TestFnArg3(t *testing.T) {
 
 	t.Run("FnArg3 P2 Case", func(t *testing.T) {
 		r1 := FnArg3[int, int, int, int](sum).P2(1, 2)(3)
+		assert.Equal(t, sum(1, 2, 3), r1)
+	})
+
+	t.Run("FnArg3 P3 Case", func(t *testing.T) {
+		r1 := FnArg3[int, int, int, int](sum).P3(1, 2, 3)()
 		assert.Equal(t, sum(1, 2, 3), r1)
 	})
 }
@@ -80,6 +101,11 @@ func TestFnArg4(t *testing.T) {
 
 	t.Run("FnArg4 P3 Case", func(t *testing.T) {
 		r1 := FnArg4[int, int, int, int, int](sum).P3(1, 2, 3)(4)
+		assert.Equal(t, sum(1, 2, 3, 4), r1)
+	})
+
+	t.Run("FnArg4 P4 Case", func(t *testing.T) {
+		r1 := FnArg4[int, int, int, int, int](sum).P4(1, 2, 3, 4)()
 		assert.Equal(t, sum(1, 2, 3, 4), r1)
 	})
 }
@@ -144,6 +170,11 @@ func TestFnArg5(t *testing.T) {
 
 	t.Run("FnArg5 P4 Case", func(t *testing.T) {
 		r1 := FnArg5[int, int, int, int, int, int](sum).P4(1, 2, 3, 4)(5)
+		assert.Equal(t, sum(1, 2, 3, 4, 5), r1)
+	})
+
+	t.Run("FnArg5 P5 Case", func(t *testing.T) {
+		r1 := FnArg5[int, int, int, int, int, int](sum).P5(1, 2, 3, 4, 5)()
 		assert.Equal(t, sum(1, 2, 3, 4, 5), r1)
 	})
 }
