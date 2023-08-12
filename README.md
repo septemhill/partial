@@ -6,6 +6,9 @@ We still need type parameters to infer `FnArgX` currently,
 but after [#58650](https://github.com/golang/go/issues/58650) be implemented, 
 we could make it more clear.
 
+EDIT: After testing on Go 1.21, we still need add type inference manually
+please references to https://github.com/golang/go/issues/61948#issuecomment-1675196625 
+
 ```go
 func Sum(a, b, c, d int) int {
     return a + b + c + d
